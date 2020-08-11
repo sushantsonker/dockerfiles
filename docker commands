@@ -1,0 +1,38 @@
+To copy docker images from one host to another and upload to artifactory
+
+
+# On source host
+docker save -o <path for generated tar file> <image name>
+ 
+# To upload image to artifactory
+curl -uusername:password -T ansible-image-v3.tar "https://artifactory-name/artifactory/tarball_repo/ansible-image-v3.tar"
+ 
+#On target host
+docker load -i <path to image tar file>
+Stop and remove all docker containers on a node
+docker container stop $(docker container ls -aq)
+docker container rm $(docker container ls -aq)
+Windows - Shared Drive
+# From Git bash (run docker as linux container)
+ 
+cd /c/Users/username/Downloads/azure_devops_repos/oss2-ansible/playbooks
+winpty docker run --rm -it -v /$(pwd):/ansible/playbooks ansible-new-image test-playbook.yml
+
+Windows - Run ansible from docker container
+Upgrade docker desktop to 2.3.0.3 or higher
+
+docker run --rm -it -v c:/Users/username/Downloads/azure_devops_repos/oss2-ansible/playbooks:/ansible/playbooks ansible-image test-playbook.yml
+ 
+# Set docker context for kubernetes
+ 
+docker context ls
+docker run --rm -it -v c:/Users/username/Desktop/azure-devops-repos:/ansible/playbook --entrypoint bash ansible10
+docker run --rm -it -v c:/Users/username/Desktop/azure-devops-repos:/home --entrypoint bash python3:1.0
+Windows - python image
+# To rebuild an image after Dockerfile update
+docker build -t pythonimage .
+# OR
+docker build -t vieux/apache:2.0 - < Dockerfile-python3
+ 
+docker run --name test1 pythonimage
+docker run --name test2 pythonimage /home/a.py
