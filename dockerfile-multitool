@@ -1,9 +1,10 @@
+FROM gliderlabs/alpine:3.3
 ADD file:f17f65714f703db9012f00e5ec98d0b2541ff6147c2633f7ab9ba659d0c507f4 in /
 CMD ["/bin/sh"]
 MAINTAINER Kamran Azeem & Henrik Høegh (kaz@praqma.net, heh@praqma.net) 0B buildkit.dockerfile.v0
 EXPOSE map[443/tcp:{} 80/tcp:{}] 0B buildkit.dockerfile.v0
 RUN /bin/sh -c apk update
-   &&  apk add apache2-utils bash bind-tools busybox-extras curl ethtool git iperf3 iproute2 iputils jq lftp mtr mysql-client netcat-openbsd net-tools nginx nmap openssh-client openssl perl-net-telnet postgresql-client procps rsync socat tcpdump tshark wget
+   &&  apk add apache2-utils bash bind-tools busybox-extras curl ethtool git iperf3 iproute2 iputils jq lftp mtr mysql-client netcat-openbsd net-tools nginx nmap openssh-client openssl perl-net-telnet postgresql-client procps rsync socat tcpdump tshark wget openldap-clients
    &&  mkdir /certs
    &&  chmod 700 /certs
    &&  openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -keyout /certs/server.key -out /certs/server.crt -subj '/CN=localhost' # buildkit 215MB buildkit.dockerfile.v0
